@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Matrix Code Rain</title>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        background: black;
+      }
+      canvas {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="matrixcanvas"></canvas>
+    <script>
+      const canvas = document.getElementById("matrixCanvas");
+      const ctx = canvas.getContext("2d");
+
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const columns = Math.floor(canvas.width / 20);
+      const drops = Array(columns).fill(0);
+      const characters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+      function drawMatrixRain() {
+        ctx.fillstyle = "rgba(0,0,0,0.5)";
+        ctx.fillrect(0, 0, canvas.width, canvas.height);
+
+        ctx.fillstyle = "#0F0";
+        ctx.font = "20px monospace";
+
+        for (let i = 0; i < drops.length; i++) {
+          const char = characters.charAt(
+            Math.floor(Math.random() * characters.length)
+          );
+          ctx.fillText(char, i * 20, drops[i] * 20);
+
+          if (Math.random() > 0.975) {
+            drops[i] = 0;
+          }
+          drops[i]++;
+        }
+      }
+
+      function animate() {
+        drawMatrixRain();
+        requestAnimationFrame(animate);
+      }
+
+      window.addEventListener("resize", () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        drops.length = Math.floor(canvas.width / 20);
+        drops.fill(0);
+      });
+
+      animate();
+    </script>
+  </body>
+</html>
