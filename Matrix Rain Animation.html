@@ -3,64 +3,67 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Matrix Code Rain</title>
+    <title>Matrix Rain</title>
     <style>
       body {
         margin: 0;
+        padding: 0;
+        background-color: black;
         overflow: hidden;
-        background: black;
       }
       canvas {
         display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      .matrix {
+        font-family: monospace;
+        color: #0f0;
+        font-size: 20px;
+        opacity: 0.8;
       }
     </style>
   </head>
   <body>
-    <canvas id="matrixcanvas"></canvas>
+    <canvas id="matrix"></canvas>
     <script>
-      const canvas = document.getElementById("matrixCanvas");
+      const canvas = document.getElementById("matrix");
       const ctx = canvas.getContext("2d");
 
-      canvas.width = window.innerWidth;
+      // Resize canvas to fill the entire screen
       canvas.height = window.innerHeight;
+      canvas.width = window.innerWidth;
 
-      const columns = Math.floor(canvas.width / 20);
-      const drops = Array(columns).fill(0);
-      const characters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+      const charArray = characters.split("");
 
-      function drawMatrixRain() {
-        ctx.fillStyle = "rgba(0,0,0,0.5)";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
+      const fontSize = 16;
+      const columns = canvas.width / fontSize;
+      const drops = new Array(Math.floor(columns)).fill(1);
 
-        ctx.fillstyle = "#0F0";
-        ctx.font = "20px monospace";
+      // Function to create the matrix effect
+      function drawMatrix() {
+        ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height); // Create fading effect
+
+        ctx.fillStyle = "#0f0"; // Green color for text
+        ctx.font = `${fontSize}px monospace`;
 
         for (let i = 0; i < drops.length; i++) {
-          const char = characters.charAt(
-            Math.floor(Math.random() * characters.length)
-          );
-          ctx.fillText(char, i * 20, drops[i] * 20);
+          const char = charArray[Math.floor(Math.random() * charArray.length)];
+          ctx.fillText(char, i * fontSize, drops[i] * fontSize);
 
-          if (Math.random() > 0.975) {
-            drops[i] = 0;
+          if (drops[i] * fontSize > canvas.height || Math.random() > 0.98) {
+            drops[i] = 0; // Reset the drop to the top
           }
+
           drops[i]++;
         }
       }
 
-      function animate() {
-        drawMatrixRain();
-        requestAnimationFrame(animate);
-      }
-
-      window.addEventListener("resize", () => {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        drops.length = Math.floor(canvas.width / 20);
-        drops.fill(0);
-      });
-
-      animate();
+      // Refresh the animation
+      setInterval(drawMatrix, 35);
     </script>
   </body>
 </html>
