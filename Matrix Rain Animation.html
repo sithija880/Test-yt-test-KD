@@ -19,7 +19,7 @@
       }
       .matrix {
         font-family: monospace;
-        color: rgb(119, 0, 255)56, 3, 180);
+        color: rgb(0, 255, 13);
         font-size: 20px;
         opacity: 0.8;
       }
@@ -35,10 +35,11 @@
       canvas.height = window.innerHeight;
       canvas.width = window.innerWidth;
 
-      const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+      const characters =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789§%‰⁂¶&⁇⁜±※♪@#$!";
       const charArray = characters.split("");
 
-      const fontSize = 16;
+      const fontSize = 15;
       const columns = canvas.width / fontSize;
       const drops = new Array(Math.floor(columns)).fill(1);
 
@@ -63,7 +64,7 @@
       }
 
       // Refresh the animation
-      setInterval(drawMatrix, 35);
+      setInterval(drawMatrix, 40);
     </script>
   </body>
 </html>
