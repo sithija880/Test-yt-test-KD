@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Minecraft Ultimate Guide</title>
+    <style>
+      /* Global Reset */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      /* Body and Font */
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: #f1f1f1;
+        color: #333;
+        line-height: 1.6;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        overflow-x: hidden;
+        opacity: 0;
+        animation: fadeIn 2s forwards;
+      }
+
+      /* Header Styles */
+      header {
+        background-color: #1e2a47;
+        color: white;
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        opacity: 0;
+        animation: slideDown 1.5s ease-in-out forwards;
+      }
+
+      header .logo h1 {
+        font-size: 2.5rem;
+        font-weight: bold;
+        letter-spacing: 1px;
+      }
+
+      header nav ul {
+        list-style: none;
+        display: flex;
+        gap: 20px;
+      }
+
+      header nav ul li a {
+        color: white;
+        text-decoration: none;
+        font-size: 1.1rem;
+        font-weight: 500;
+        transition: color 0.3s ease, transform 0.3s ease;
+      }
+
+      header nav ul li a:hover {
+        color: #f1c40f;
+        transform: scale(1.1);
+      }
+
+      /* Main Section Styling */
+      .main-content {
+        flex: 1;
+        padding: 40px 20px;
+        margin: 20px 0;
+        background-color: #ffffff;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease-in-out;
+        opacity: 0;
+        animation: fadeInUp 1.5s forwards;
+      }
+
+      .main-content:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+      }
+
+      h2 {
+        font-size: 2.3rem;
+        color: #333;
+        margin-bottom: 20px;
+        text-align: center;
+        letter-spacing: 1px;
+        font-weight: 600;
+      }
+
+      /* Image in Overview */
+      #overview img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        opacity: 0;
+        animation: fadeInUp 2s ease-in-out forwards;
+      }
+
+      /* Lists */
+      ul,
+      ol {
+        margin-left: 30px;
+        font-size: 1.1rem;
+      }
+
+      ul li {
+        padding-bottom: 10px;
+      }
+
+      ol li {
+        padding-bottom: 10px;
+        list-style-type: decimal;
+      }
+
+      /* Version History Section Styling */
+      .version-history {
+        background-color: #eef2f5;
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        margin-top: 40px;
+        opacity: 0;
+        animation: fadeInUp 2s ease-in-out forwards;
+      }
+
+      .version-history h2 {
+        font-size: 2.5rem;
+        color: #333;
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .version-item {
+        margin-bottom: 20px;
+      }
+
+      .version-item h3 {
+        font-size: 1.8rem;
+        color: #1e2a47;
+      }
+
+      .version-item p {
+        font-size: 1.1rem;
+        color: #555;
+      }
+
+      /* Footer */
+      footer {
+        text-align: center;
+        padding: 20px;
+        background-color: #1e2a47;
+        color: white;
+        position: relative;
+        width: 100%;
+        font-size: 1rem;
+        opacity: 0;
+        animation: fadeInUp 2.5s ease-in-out forwards;
+      }
+
+      /* Animation Definitions */
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      @keyframes slideDown {
+        0% {
+          transform: translateY(-50px);
+        }
+        100% {
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeInUp {
+        0% {
+          opacity: 0;
+          transform: translateY(50px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Scroll Animation */
+      .scroll-fade {
+        opacity: 0;
+        transform: translateY(50px);
+        animation: fadeInUp 2s ease-in-out forwards;
+      }
+
+      /* Responsive Styles */
+      @media screen and (max-width: 768px) {
+        header .logo h1 {
+          font-size: 1.8rem;
+        }
+
+        header nav ul {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        header nav ul li {
+          margin: 10px 0;
+        }
+
+        .main-content {
+          padding: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <h1>Minecraft Ultimate Guide</h1>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#overview">Overview</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#tips">Tips & Tricks</a></li>
+          <li><a href="#mods">Mods</a></li>
+          <li><a href="#version-history">Version History</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="main-content">
+      <section id="overview" class="section scroll-fade">
+        <h2>Overview of Minecraft</h2>
+        <p>
+          Minecraft is a sandbox game developed by Mojang Studios where players
+          can build and explore blocky, procedurally generated 3D worlds.
+        </p>
+        <img src="minecraft_overview.jpg" alt="Minecraft Overview" />
+      </section>
+
+      <section id="features" class="section scroll-fade">
+        <h2>Features</h2>
+        <ul>
+          <li>Open-world exploration</li>
+          <li>Survival and Creative modes</li>
+          <li>Multiplayer functionality</li>
+          <li>Redstone mechanics</li>
+          <li>Mods and community-driven content</li>
+        </ul>
+      </section>
+
+      <section id="tips" class="section scroll-fade">
+        <h2>Tips & Tricks</h2>
+        <p>Here are some top tips for mastering Minecraft:</p>
+        <ol>
+          <li>Start with a shelter before nightfall to avoid mobs.</li>
+          <li>Use a crafting table to craft more complex items.</li>
+          <li>Always carry a bed to reset your spawn point.</li>
+        </ol>
+      </section>
+
+      <section id="mods" class="section scroll-fade">
+        <h2>Popular Mods</h2>
+        <ul>
+          <li>Optifine – Enhance game performance.</li>
+          <li>JourneyMap – Adds a map to your game.</li>
+          <li>Pixelmon – Adds Pokémon to the world of Minecraft.</li>
+        </ul>
+      </section>
+
+      <!-- Minecraft Version History Section -->
+      <section id="version-history" class="version-history scroll-fade">
+        <h2>Minecraft Version History</h2>
+
+        <!-- Minecraft Versions -->
+        <div class="version-item">
+          <h3>Alpha Versions</h3>
+          <p>
+            <strong>Alpha 1.0.0</strong> (June 30, 2010) - The first version
+            with multiplayer support, and world generation. Introduced basic
+            gameplay mechanics.
+          </p>
+          <p>
+            <strong>Alpha 1.2.6</strong> (October 20, 2010) - Introduced biomes
+            and various updates.
+          </p>
+        </div>
+
+        <div class="version-item">
+          <h3>Beta Versions</h3>
+          <p>
+            <strong>Beta 1.3</strong> (February 22, 2011) - Added the ability to
+            change the game mode, new mobs, and crafting changes.
+          </p>
+          <p>
+            <strong>Beta 1.7</strong> (October 2011) - Introduced pistons and
+            the Adventure Update.
+          </p>
+        </div>
+
+        <div class="version-item">
+          <h3>Official Release</h3>
+          <p>
+            <strong>1.0 - The Official Release</strong> (November 18, 2011) -
+            The game was officially released to the public. New content included
+            The End and the Ender Dragon.
+          </p>
+        </div>
+
+        <div class="version-item">
+          <h3>Version 1.8</h3>
+          <p>
+            <strong>1.8 - The Bountiful Update</strong> (September 2, 2014) -
+            Introduced new biomes, hunger mechanics, Elytra, and more.
+          </p>
+        </div>
+
+        <div class="version-item">
+          <h3>Version 1.16</h3>
+          <p>
+            <strong>1.16 - The Nether Update</strong> (June 23, 2020) - Major
+            changes to the Nether, including new biomes and mobs like Piglins
+            and the Netherite resource.
+          </p>
+        </div>
+
+        <div class="version-item">
+          <h3>Version 1.18</h3>
+          <p>
+            <strong>1.18 - Caves & Cliffs Part I</strong> (November 30, 2021) -
+            New cave generation, mountains, and biomes.
+          </p>
+        </div>
+
+        <!-- Add more versions as needed -->
+      </section>
+    </div>
+
+    <footer>
+      <p>&copy; 2025 Minecraft Ultimate Guide | All Rights Reserved</p>
+    </footer>
+  </body>
+</html>
