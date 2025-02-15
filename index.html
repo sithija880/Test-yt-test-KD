@@ -1,8 +1,144 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
-    <title>github test</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Full Functioned Code Editor</title>
+
+    <!-- CodeMirror Styles -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.1/codemirror.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+      }
+
+      .editor-container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100vh;
+        padding: 20px;
+      }
+
+      .toolbar {
+        text-align: right;
+        margin-bottom: 10px;
+      }
+
+      button {
+        padding: 10px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+
+      .editor {
+        margin: 20px 0;
+        flex-grow: 1;
+      }
+
+      .console {
+        background-color: #222;
+        color: #fff;
+        padding: 10px;
+        border-radius: 5px;
+        height: 200px;
+        overflow-y: auto;
+        margin-top: 20px;
+      }
+    </style>
   </head>
   <body>
-    <h1>iagueygfygeyfggu</h1>
+    <div class="editor-container">
+      <div class="toolbar">
+        <button id="runBtn">Run</button>
+        <button id="saveBtn">Save Code</button>
+        <input type="file" id="loadFile" style="display: none" />
+        <button id="loadBtn">Load Code</button>
+      </div>
+
+      <div class="editor">
+        <textarea
+          id="codeEditor"
+          placeholder="Write your code here..."
+        ></textarea>
+      </div>
+
+      <div class="console">
+        <h3>Console Output</h3>
+        <pre id="output"></pre>
+      </div>
+    </div>
+
+    <!-- Include CodeMirror Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.1/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.1/mode/javascript/javascript.min.js"></script>
+
+    <script>
+      // Initialize CodeMirror editor
+      const editor = CodeMirror.fromTextArea(
+        document.getElementById("codeEditor"),
+        {
+          lineNumbers: true,
+          mode: "javascript",
+          theme: "default",
+          matchBrackets: true,
+        }
+      );
+
+      // Output element to display results
+      const outputArea = document.getElementById("output");
+
+      // Run button functionality: Execute JavaScript code
+      document.getElementById("runBtn").addEventListener("click", function () {
+        const code = editor.getValue(); // Get the code from the editor
+        try {
+          // Run the code and display output
+          const result = eval(code);
+          outputArea.textContent = result || "No output";
+        } catch (error) {
+          outputArea.textContent = `Error: ${error.message}`;
+        }
+      });
+
+      // Save button functionality: Save code to a file
+      document.getElementById("saveBtn").addEventListener("click", function () {
+        const code = editor.getValue();
+        const blob = new Blob([code], { type: "text/plain" });
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = "myCode.js";
+        link.click();
+      });
+
+      // Load button functionality: Load code from a file
+      document.getElementById("loadBtn").addEventListener("click", function () {
+        document.getElementById("loadFile").click();
+      });
+
+      document
+        .getElementById("loadFile")
+        .addEventListener("change", function (event) {
+          const file = event.target.files[0];
+          if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+              editor.setValue(e.target.result); // Set code in the editor
+            };
+            reader.readAsText(file);
+          }
+        });
+    </script>
   </body>
 </html>
